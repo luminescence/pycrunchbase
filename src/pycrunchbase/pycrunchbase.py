@@ -32,7 +32,7 @@ class CrunchBase(object):
             raise ValueError('API key for CrunchBase not supplied')
         self.api_key = api_key
 
-    def organizations(self, name):
+    def organizations(self, parameters):
         """
         Search for a organization given a name, returns the first
         :class:`Page` of results
@@ -40,8 +40,9 @@ class CrunchBase(object):
         Returns:
             Page or None
         """
+
         url = self.ORGANIZATIONS_URL
-        data = self._make_request(url, {'name': name})
+        data = self._make_request(url, parameters)
         if not data or data.get('error'):
             return None
         return Page(name, data)
